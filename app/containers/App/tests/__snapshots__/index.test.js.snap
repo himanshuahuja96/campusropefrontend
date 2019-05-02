@@ -6,6 +6,16 @@ exports[`<App /> should render and match the snapshot 1`] = `
     <Route
       component={[Function]}
       exact={true}
+      path="/login"
+    />
+    <Route
+      component={[Function]}
+      exact={true}
+      path="/signup"
+    />
+    <Route
+      component={[Function]}
+      exact={true}
       path="/"
     />
     <Route
