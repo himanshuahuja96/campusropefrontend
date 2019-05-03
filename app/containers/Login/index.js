@@ -151,7 +151,6 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
     onLoginFormSubmit: (values, actions) =>
       dispatch(onLoginFormSubmit(values, actions)),
     setRedirectToReferrer: bool => dispatch(setRedirectToReferrer(bool)),
