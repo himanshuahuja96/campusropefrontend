@@ -13,8 +13,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import { createMuiTheme } from '@material-ui/core/styles';
+import purple from '@material-ui/core/colors/purple';
+import { install, ThemeProvider } from '@material-ui/styles';
 import history from 'utils/history';
 import 'sanitize.css/sanitize.css';
 
@@ -36,11 +37,16 @@ import configureStore from './configureStore';
 import { translationMessages } from './i18n';
 import './app.css';
 
+install(); // bootstrap material-ui style system
 // Create redux store with history
 const initialState = {};
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
 const theme = createMuiTheme({
+  palette: {
+    primary: { main: purple[500] }, // Purple and green play nicely together.
+    secondary: { main: '#11cb5f' }, // This is just green.A700 as hex.
+  },
   typography: {
     // Use the system font instead of the default Roboto font.
     fontFamily: 'Berkshire Swash',
@@ -52,9 +58,9 @@ const render = messages => {
     <Provider store={store}>
       <LanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
-          <MuiThemeProvider theme={theme}>
+          <ThemeProvider theme={theme}>
             <App />
-          </MuiThemeProvider>
+          </ThemeProvider>
         </ConnectedRouter>
       </LanguageProvider>
     </Provider>,

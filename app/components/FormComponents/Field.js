@@ -1,24 +1,35 @@
 /**
  *
- * FormComponents
+ * FormComponents/Field
  *
  */
 
 import React, { memo } from 'react';
-// import PropTypes from 'prop-types';
-// import styled from 'styled-components';
+import MuiTextField from '@material-ui/core/TextField';
+import { getIn } from 'formik';
 
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
+export const fieldToTextField = ({
+  field,
+  form,
+  variant,
+  disabled = false,
+  ...props
+}) => {
+  const { name } = field;
+  const { touched, errors, isSubmitting } = form;
 
-function FormComponents() {
-  return (
-    <div>
-      <FormattedMessage {...messages.header} />
-    </div>
-  );
-}
+  const fieldError = getIn(errors, name);
+  const showError = getIn(touched, name) && !!fieldError;
+  return {
+    ...props,
+    ...field,
+    variant,
+    error: showError,
+    helperText: showError ? fieldError : props.helperText,
+    disabled: isSubmitting || disabled,
+  };
+};
 
-FormComponents.propTypes = {};
+const Field = ({ ...props }) => <MuiTextField {...fieldToTextField(props)} />;
 
-export default memo(FormComponents);
+export default memo(Field);
