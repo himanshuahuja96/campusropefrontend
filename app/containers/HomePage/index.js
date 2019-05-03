@@ -5,7 +5,7 @@
  */
 
 import React, { memo } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
@@ -27,7 +27,6 @@ export function HomePage() {
         <title>HomePage</title>
         <meta name="description" content="Description of HomePage" />
       </Helmet>
-      
     </div>
   );
 }

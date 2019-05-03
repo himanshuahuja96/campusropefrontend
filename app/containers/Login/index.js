@@ -101,7 +101,7 @@ export function Login(props) {
           <LoginForm onSubmit={onLoginFormSubmit} />
           <GoogleLogin
             clientId="568630519870-7tfbcptdncktm77enij1t8i0q6bpo9hs.apps.googleusercontent.com"
-            onSuccess={c => console.log(c)}
+            onSuccess={() => {}}
             onFailure={() => {}}
             uxMode="popup"
             render={({ onClick }) => (
