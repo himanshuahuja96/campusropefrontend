@@ -1,17 +1,21 @@
 /**
  *
- * LinearProgress
+ * Progress
  *
  */
 
-import React, { memo } from 'react';
-// import PropTypes from 'prop-types';
-// import styled from 'styled-components';
+import React from 'react';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
-function LinearProgress() {
-  return <div />;
+/* eslint-disable react/prefer-stateless-function */
+function CustomProgress() {
+  return (
+    <div className="progress">
+      <LinearProgress variant="query" color="secondary" />
+    </div>
+  );
 }
 
-LinearProgress.propTypes = {};
+CustomProgress.propTypes = {};
 
-export default memo(LinearProgress);
+export default CustomProgress;

@@ -5,20 +5,33 @@
  */
 
 import React, { memo } from 'react';
-// import PropTypes from 'prop-types';
-// import styled from 'styled-components';
+import { Route, Redirect } from 'react-router-dom';
+import ls from 'local-storage';
+import { USER_TOKEN } from '../../constants/local_storage_constants';
 
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
-
-function PrivateRoute() {
-  return (
-    <div>
-      <FormattedMessage {...messages.header} />
-    </div>
-  );
+/* eslint-disable */
+function PrivateRoute(props){
+ function renderComponentOrRedirect(props){
+    if (ls.get(USER_TOKEN)) {
+      const { component: Component } = props;
+      return <Component {...props} />;
+    }
+    return (
+      <Redirect
+        to={{
+          pathname: '/login',
+          state: { from: props.location },
+        }}
+      />
+    );
+  }
+    const { component, ...rest } = props;
+    return (
+      <Route
+        {...rest}
+        render={props => renderComponentOrRedirect(props)}
+      />
+    );
 }
-
-PrivateRoute.propTypes = {};
 
 export default memo(PrivateRoute);
