@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { makeStyles } from '@material-ui/styles';
 
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -8,7 +8,7 @@ import Cancel from '@material-ui/icons/Cancel';
 import Button from '@material-ui/core/Button';
 import PlaylistAdd from '@material-ui/icons/PlaylistAdd';
 
-const styles = () => ({
+const useStyles = makeStyles({
   taskList: {
     padding: 0,
     '& li': {
@@ -62,40 +62,37 @@ const renderAssignedTasks = (tasks, classes, handleRemoveTask) => {
   ));
 };
 
-const TaskSummaryComponent = ({
-  tasks,
-  handleRemoveTask,
-  classes,
-  saveAdminTasks,
-}) => (
-  <Paper className={classes.taskPaper}>
-    <Typography className={classes.summeryTitle} variant="body1">
-      <i>
-        <PlaylistAdd />
-      </i>
-      <span>Summary</span>
-    </Typography>
+export function TaskSummaryComponent(props) {
+  const classes = useStyles();
+  const { tasks, handleRemoveTask, saveAdminTasks } = props;
 
-    <ul className={classes.taskList}>
-      {renderAssignedTasks(tasks, classes, handleRemoveTask)}
-    </ul>
+  return (
+    <Paper className={classes.taskPaper}>
+      <Typography className={classes.summeryTitle} variant="body1">
+        <i>
+          <PlaylistAdd />
+        </i>
+        <span>Summary</span>
+      </Typography>
 
-    <Button
-      variant="contained"
-      color="primary"
-      className={classes.saveButton}
-      onClick={() => saveAdminTasks()}
-    >
-      Save
-    </Button>
-  </Paper>
-);
+      <ul className={classes.taskList}>
+        {renderAssignedTasks(tasks, classes, handleRemoveTask)}
+      </ul>
+
+      <Button
+        variant="contained"
+        color="primary"
+        className={classes.saveButton}
+        onClick={() => saveAdminTasks()}
+      >
+        Save
+      </Button>
+    </Paper>
+  );
+}
 
 TaskSummaryComponent.propTypes = {
-  classes: PropTypes.object.isRequired,
   handleRemoveTask: PropTypes.func,
   tasks: PropTypes.array,
   saveAdminTasks: PropTypes.func,
 };
-
-export default withStyles(styles)(TaskSummaryComponent);

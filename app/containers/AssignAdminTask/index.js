@@ -24,6 +24,12 @@ import makeSelectAssignAdminTask from './selectors';
 import TaskSummary from './TaskSummary';
 import reducer from './reducer';
 import saga from './saga';
+import {
+  fetchAdminTasksOfGivenUser,
+  toggleAdminTaskSelection,
+  saveAdminTasks,
+  clearTasks,
+} from './actions';
 
 const useStyles = makeStyles(theme => ({
   paperRoot: {
@@ -63,8 +69,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function RenderAdminTasks({ adminTasks }) {
+function AdminTasks(props) {
   const classes = useStyles();
+  const { adminTasks, handleCheckboxChange } = props;
   return adminTasks.map(task => {
     const taskItemClassName = classNames({
       [classes.taskListItems]: true,
@@ -82,7 +89,7 @@ function RenderAdminTasks({ adminTasks }) {
         >
           {task.taskName}
           <Checkbox
-            onChange={() => this.handleCheckboxChange(task.id)}
+            onChange={() => handleCheckboxChange(task.id)}
             checked={task.selected}
             color="primary"
           />
@@ -97,8 +104,8 @@ export function AssignAdminTask(props) {
   const {
     onSelectUser,
     adminTasks,
-    clearTasks,
-    toggleAdminTaskSelection,
+    clearAdminTasks,
+    toggleAdminTasksSelection,
     saveAdminTasksDispatch,
     selectedAdminTasks,
   } = props;
@@ -106,12 +113,12 @@ export function AssignAdminTask(props) {
   useInjectSaga({ key: 'assignAdminTask', saga });
 
   useEffect(() => {
-    clearTasks(); // componentDidMount
+    clearAdminTasks(); // componentDidMount
   }, []);
 
-  handleCheckboxChange = taskId => {
-    toggleAdminTaskSelection(taskId);
-  };
+  function handleCheckboxChange(taskId) {
+    toggleAdminTasksSelection(taskId);
+  }
 
   return (
     <div className={classes.root}>
@@ -125,13 +132,16 @@ export function AssignAdminTask(props) {
         <Grid container>
           <Grid item xs={12} sm={7} md={9}>
             <div className={classes.taskListRoot}>
-              <RenderAdminTasks adminTasks={adminTasks} />
+              <AdminTasks
+                adminTasks={adminTasks}
+                handleCheckboxChange={handleCheckboxChange}
+              />
             </div>
           </Grid>
 
           <Grid item xs={12} sm={5} md={3}>
             <TaskSummary
-              handleRemoveTask={this.handleCheckboxChange}
+              handleRemoveTask={handleCheckboxChange}
               tasks={selectedAdminTasks}
               saveAdminTasks={saveAdminTasksDispatch}
             />
@@ -147,8 +157,8 @@ AssignAdminTask.propTypes = {
   adminTasks: PropTypes.array.isRequired,
   saveAdminTasksDispatch: PropTypes.func.isRequired,
   selectedAdminTasks: PropTypes.array.isRequired,
-  toggleAdminTaskSelection: PropTypes.func.isRequired,
-  clearTasks: PropTypes.func.isRequired,
+  toggleAdminTasksSelection: PropTypes.func.isRequired,
+  clearAdminTasks: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -158,6 +168,11 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
+    onSelectUser: userId => dispatch(fetchAdminTasksOfGivenUser(userId)),
+    toggleAdminTasksSelection: taskId =>
+      dispatch(toggleAdminTaskSelection(taskId)),
+    saveAdminTasksDispatch: () => dispatch(saveAdminTasks()),
+    clearAdminTasks: () => dispatch(clearTasks()),
   };
 }
 

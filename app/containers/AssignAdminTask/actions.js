@@ -36,7 +36,7 @@ export function toggleAdminTaskSelection(taskId) {
 export function setAdminTasks(tasks) {
   return {
     type: SET_ADMIN_TASKS,
-    adminTaskInfo : tasks,
+    adminTaskInfo: tasks,
   };
 }
 

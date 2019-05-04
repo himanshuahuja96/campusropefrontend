@@ -1,26 +1,30 @@
 import { createSelector } from 'reselect';
-import { initialState } from './reducer';
 
 /**
- * Direct selector to the assignAdminTask state domain
+ * Direct selector to the adminTask state domain
  */
 
-const selectAssignAdminTaskDomain = state =>
-  state.assignAdminTask || initialState;
+const selectAdminTaskDomain = state => state.adminTask;
 
 /**
  * Other specific selectors
  */
 
-/**
- * Default selector used by AssignAdminTask
- */
-
-const makeSelectAssignAdminTask = () =>
+const makeSelectAdminTask = () =>
   createSelector(
-    selectAssignAdminTaskDomain,
-    substate => substate,
+    selectAdminTaskDomain,
+    substate => substate.tasks,
   );
 
-export default makeSelectAssignAdminTask;
-export { selectAssignAdminTaskDomain };
+const makeSelectSelectedAdminTask = () =>
+  createSelector(
+    selectAdminTaskDomain,
+    state => state.tasks.filter(task => task.selected),
+  );
+
+export default makeSelectAdminTask;
+export {
+  selectAdminTaskDomain,
+  makeSelectAdminTask,
+  makeSelectSelectedAdminTask,
+};
