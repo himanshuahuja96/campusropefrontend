@@ -11,7 +11,10 @@ import styled from 'styled-components';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { push } from 'react-router-redux';
+import { Switch, Route } from 'react-router-dom';
 import { compose } from 'redux';
+
+import Drawer from 'components/Drawer';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
@@ -19,7 +22,14 @@ import makeSelectHomePage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
+import HomeButtons from './HomeButtons';
 import { changeRoute, routeToUserProfile, homeMounted } from './actions';
+import {
+  makeSelectLoggedUserMenus,
+  isLoggedIn,
+  makeSelectLoggedUser,
+  makeSelectLoggedUserHomeMenus,
+} from '../../store/loggeduser/selectors';
 
 const CenterPanel = styled.div`
   background: #fff;
@@ -33,7 +43,13 @@ const CenterMenuWrapper = styled.div``;
 
 export function HomePage(props) {
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [homeMountedDispatch, dispatch, drawerMenus, loggedUserInfo] = props;
+  const [
+    homeMountedDispatch,
+    dispatch,
+    drawerMenus,
+    loggedUserInfo,
+    homeMenus,
+  ] = props;
   useInjectReducer({ key: 'homePage', reducer });
   useInjectSaga({ key: 'homePage', saga });
 
@@ -60,7 +76,7 @@ export function HomePage(props) {
         <title>Home</title>
         <meta name="description" content="Homepage of Campusrope" />
       </Helmet>
-      {isLoggedIn() ? (
+      {/* {isLoggedIn() ? (
         <NewAppBar
           gotoUserProfile={gotoUserProfile}
           gotoSelectedRoute={gotoSelectedRoute}
@@ -68,7 +84,7 @@ export function HomePage(props) {
         />
       ) : (
         <PublicAppBar />
-      )}
+      )} */}
       <Drawer
         open={!!drawerOpen}
         toggleDrawer={toggleDrawer}
@@ -78,7 +94,17 @@ export function HomePage(props) {
       />
       <CenterPanel>
         {!isLoggedIn() && <HeaderTabs />}
-        <CenterMenuWrapper />
+        <CenterMenuWrapper>
+          <Switch>
+            <Route
+              exact
+              path="/"
+              component={routerProps => (
+                <HomeButtons menus={homeMenus} {...routerProps} />
+              )}
+            />
+          </Switch>
+        </CenterMenuWrapper>
       </CenterPanel>
     </React.Fragment>
   );
@@ -88,6 +114,9 @@ HomePage.propTypes = {};
 
 const mapStateToProps = createStructuredSelector({
   homePage: makeSelectHomePage(),
+  homeMenus: makeSelectLoggedUserHomeMenus(),
+  loggedUserInfo: makeSelectLoggedUser(),
+  drawerMenus: makeSelectLoggedUserMenus(),
 });
 
 function mapDispatchToProps(dispatch) {
