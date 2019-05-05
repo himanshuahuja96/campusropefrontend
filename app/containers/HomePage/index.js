@@ -10,11 +10,11 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
-import { push } from 'react-router-redux';
 import { Switch, Route } from 'react-router-dom';
 import { compose } from 'redux';
 
 import Drawer from 'components/Drawer';
+import AppBar from 'components/AppBar';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
@@ -23,7 +23,7 @@ import reducer from './reducer';
 import saga from './saga';
 
 import HomeButtons from './HomeButtons';
-import { changeRoute, routeToUserProfile, homeMounted } from './actions';
+import { homeMounted } from './actions';
 import {
   makeSelectLoggedUserMenus,
   isLoggedIn,
@@ -57,14 +57,6 @@ export function HomePage(props) {
     homeMountedDispatch(); // componentDidMount
   }, []);
 
-  function gotoUserProfile() {
-    dispatch(changeRoute(routeToUserProfile));
-  }
-
-  function gotoSelectedRoute(toRoute) {
-    dispatch(push(toRoute));
-  }
-
   function toggleDrawer(opened) {
     const isDrawerOpen = opened || !drawerOpen;
     setDrawerOpen(isDrawerOpen);
@@ -76,15 +68,7 @@ export function HomePage(props) {
         <title>Home</title>
         <meta name="description" content="Homepage of Campusrope" />
       </Helmet>
-      {/* {isLoggedIn() ? (
-        <NewAppBar
-          gotoUserProfile={gotoUserProfile}
-          gotoSelectedRoute={gotoSelectedRoute}
-          toggleDrawer={toggleDrawer}
-        />
-      ) : (
-        <PublicAppBar />
-      )} */}
+      <AppBar />
       <Drawer
         open={!!drawerOpen}
         toggleDrawer={toggleDrawer}

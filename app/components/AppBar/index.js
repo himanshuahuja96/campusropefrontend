@@ -5,17 +5,49 @@
  */
 
 import React, { memo } from 'react';
-// import PropTypes from 'prop-types';
-// import styled from 'styled-components';
+import MaterialUiAppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import styled from 'styled-components';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/styles';
 
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
+const Root = styled.div`
+  width: '100%';
+`;
+
+const useStyles = makeStyles(() => ({
+  title: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontFamily: 'Berkshire Swash',
+  },
+  appbar: {
+    backgroundColor: '#00235b',
+  },
+}));
 
 function AppBar() {
+  const classes = useStyles();
   return (
-    <div>
-      <FormattedMessage {...messages.header} />
-    </div>
+    <Root>
+      <MaterialUiAppBar
+        position="static"
+        color="primary"
+        className={classes.appbar}
+      >
+        <Toolbar>
+          <Typography
+            className={classes.title}
+            variant="h6"
+            color="inherit"
+            noWrap
+          >
+            CampusRope
+          </Typography>
+        </Toolbar>
+      </MaterialUiAppBar>
+    </Root>
   );
 }
 
