@@ -15,6 +15,7 @@ import { compose } from 'redux';
 
 import Drawer from 'components/Drawer';
 import AppBar from 'components/AppBar';
+import HeaderTabs from 'components/HeaderTabs';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
@@ -41,7 +42,7 @@ const CenterPanel = styled.div`
 `;
 const CenterMenuWrapper = styled.div``;
 
-export function HomePage(props) {
+function HomePage(props) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [
     homeMountedDispatch,
