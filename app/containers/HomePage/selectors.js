@@ -2,24 +2,47 @@ import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
 /**
- * Direct selector to the homePage state domain
+ * Direct selector to the home state domain
  */
 
-const selectHomePageDomain = state => state.homePage || initialState;
+const selectHomeDomain = state => state.homePage || initialState;
 
 /**
  * Other specific selectors
  */
 
 /**
- * Default selector used by HomePage
+ * Default selector used by Home
  */
 
-const makeSelectHomePage = () =>
+const makeSelectHome = () =>
   createSelector(
-    selectHomePageDomain,
+    selectHomeDomain,
     substate => substate,
   );
 
-export default makeSelectHomePage;
-export { selectHomePageDomain };
+const makeSelectIsFetchingData = () =>
+  createSelector(
+    selectHomeDomain,
+    substate => substate.isFetchingData,
+  );
+
+const makeSelectSnackData = () =>
+  createSelector(
+    selectHomeDomain,
+    substate => substate.snackData,
+  );
+
+const makeSelectRedirectAction = () =>
+  createSelector(
+    selectHomeDomain,
+    substate => substate.redirectAction,
+  );
+
+export default makeSelectHome;
+export {
+  selectHomeDomain,
+  makeSelectIsFetchingData,
+  makeSelectSnackData,
+  makeSelectRedirectAction,
+};
