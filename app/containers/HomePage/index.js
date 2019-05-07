@@ -42,7 +42,7 @@ const CenterPanel = styled.div`
 `;
 const CenterMenuWrapper = styled.div``;
 
-function HomePage(props) {
+export function HomePage(props) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [
     homeMountedDispatch,

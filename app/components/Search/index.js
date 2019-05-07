@@ -9,7 +9,7 @@
 import React, { memo } from 'react';
 import Select from 'react-select/lib/Async';
 import NoSsr from '@material-ui/core/NoSsr';
-import Typography from '@material-ui/core/Typography'; 
+import Typography from '@material-ui/core/Typography';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
