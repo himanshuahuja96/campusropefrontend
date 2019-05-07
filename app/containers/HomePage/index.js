@@ -5,7 +5,7 @@
  */
 
 import React, { memo, useState, useEffect } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet';
@@ -44,13 +44,13 @@ const CenterMenuWrapper = styled.div``;
 
 export function HomePage(props) {
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [
+  const {
     homeMountedDispatch,
     dispatch,
     drawerMenus,
     loggedUserInfo,
     homeMenus,
-  ] = props;
+  } = props;
   useInjectReducer({ key: 'homePage', reducer });
   useInjectSaga({ key: 'homePage', saga });
 
@@ -95,7 +95,14 @@ export function HomePage(props) {
   );
 }
 
-HomePage.propTypes = {};
+HomePage.propTypes = {
+  homePage: PropTypes.object.isRequired,
+  homeMenus: PropTypes.array.isRequired,
+  loggedUserInfo: PropTypes.object.isRequired,
+  drawerMenus: PropTypes.array.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  homeMountedDispatch: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = createStructuredSelector({
   homePage: makeSelectHomePage(),
