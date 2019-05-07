@@ -39,6 +39,7 @@ const CenterPanel = styled.div`
   margin: 0 auto;
   padding: 1.5rem;
   min-height: 91vh;
+  box-shadow: 0px 3px 7px -1px rgba(0, 0, 0, 0.75);
 `;
 const CenterMenuWrapper = styled.div``;
 
@@ -70,13 +71,13 @@ export function HomePage(props) {
         <meta name="description" content="Homepage of Campusrope" />
       </Helmet>
       <AppBar />
-      <Drawer
+      {/* <Drawer
         open={!!drawerOpen}
         toggleDrawer={toggleDrawer}
         dispatch={dispatch}
         menuItems={drawerMenus}
         loggedUserInfo={loggedUserInfo}
-      />
+      /> */}
       <CenterPanel>
         {!isLoggedIn() && <HeaderTabs />}
         <CenterMenuWrapper>

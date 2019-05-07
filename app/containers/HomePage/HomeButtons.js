@@ -8,13 +8,13 @@ import classNames from 'classnames';
 import Typography from '@material-ui/core/Typography';
 
 const RootComponent = Styled.div`
-    margin: 'auto';
-    display: 'flex';
-    justify-content: 'space-around';
-    flex-wrap: 'wrap';
-    width: '60%';
-    height: '75%';
-    align-items: 'center';
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 60%;
+    height: 75%;
+    align-items: center; 
 `;
 
 const useStyles = makeStyles(() => ({

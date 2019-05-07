@@ -22,6 +22,11 @@ const useStyles = makeStyles(() => ({
     justifyContent: 'center',
     fontFamily: 'Berkshire Swash',
   },
+  toolbar: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   appbar: {
     backgroundColor: '#00235b',
   },
@@ -36,10 +41,10 @@ function AppBar() {
         color="primary"
         className={classes.appbar}
       >
-        <Toolbar>
+        <Toolbar className={classes.toolbar}>
           <Typography
             className={classes.title}
-            variant="h6"
+            variant="h4"
             color="inherit"
             noWrap
           >
