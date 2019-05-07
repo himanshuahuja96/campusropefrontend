@@ -1,4 +1,4 @@
-# campusropeweb
+# campusropefrontend
 
 Frontend React/Redux app for campusrope
 
