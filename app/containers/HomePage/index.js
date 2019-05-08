@@ -71,13 +71,13 @@ export function HomePage(props) {
         <meta name="description" content="Homepage of Campusrope" />
       </Helmet>
       <AppBar />
-      {/* <Drawer
+      <Drawer
         open={!!drawerOpen}
         toggleDrawer={toggleDrawer}
         dispatch={dispatch}
         menuItems={drawerMenus}
         loggedUserInfo={loggedUserInfo}
-      /> */}
+      />
       <CenterPanel>
         {!isLoggedIn() && <HeaderTabs />}
         <CenterMenuWrapper>
