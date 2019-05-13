@@ -20,9 +20,9 @@ This project is licenced under GNU GPL V3 which gurantees the four freedoms that
 
 ### About Us
 
-Social media plays an important role in our day to day life,
+Social network plays an important role in our day to day life,
 and it is an inevitable part of our evolution.
-We are building a social media which is powered by the wisdom of the crowd.
+We are building a social network which is powered by the wisdom of the crowd.
 We believe that we can exponentially **raise the standard of living** through this technology by strengthening the foundational infrastructure of our society.
 
 ## Our Goals
@@ -54,14 +54,14 @@ Aiming to strengthen the relationship between government and citizens using tech
 
 #
 
-> ### 4. Data analytics for the greater good
+> ### 4. Data analytics for the greater good -
 
 - Data driven social service organisation & administrations
 - Facilitate communication through proper channels
 
 #
 
-> ### 5. Advance problem solving
+> ### 5. Advance problem solving -
 >
 > Through collaborative work of the open source community we aim to -
 
